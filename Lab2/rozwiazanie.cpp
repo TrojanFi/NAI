@@ -31,21 +31,19 @@ int main(int argc, char** argv) {
     namedWindow("MojeRange", WINDOW_AUTOSIZE);
     namedWindow("HSV4", WINDOW_AUTOSIZE);
 
-    int uRangeOne = 0;
-    int uRangeTwo = 0;
-    int uRangeThree = 0;
+    int LowH = 0;
+    int HighH = 0;
+    int LowS = 0;
+    int HighS = 0;
+    int LowV = 0;
+    int HighV = 0;
 
-    int lRangeOne = 0;
-    int lRangeTwo = 0;
-    int lRangeThree = 0;
-
-    createTrackbar("range1", "MojeRange", &uRangeOne, 255);
-    createTrackbar("range2", "MojeRange", &uRangeTwo, 255);
-    createTrackbar("range3", "MojeRange", &uRangeThree, 255);
-
-    createTrackbar("range4", "MojeRange", &lRangeOne, 255);
-    createTrackbar("range5", "MojeRange", &lRangeTwo, 255);
-    createTrackbar("range6", "MojeRange", &lRangeThree, 255);
+    createTrackbar("LowH", "MojeRange", &LowH, 180);
+    createTrackbar("HighH", "MojeRange", &HighH, 180);
+    createTrackbar("LowS", "MojeRange", &LowS, 255);
+    createTrackbar("HighS", "MojeRange", &HighS, 255);
+    createTrackbar("LowV", "MojeRange", &LowV, 255);
+    createTrackbar("HighV", "MojeRange", &HighV, 255);
 
 
     do {
@@ -88,18 +86,16 @@ int main(int argc, char** argv) {
         cvtColor(frame, pokazaniehsv, COLOR_BGR2HSV); // (frame,docelowyframe,rodzajkolorów)
 
 
-           inRange(MojeRange, Scalar(uRangeOne, uRangeTwo, uRangeThree),
-               Scalar(lRangeOne, lRangeTwo, lRangeThree),
-              MojeRange);
+           inRange(MojeRange, Scalar(LowH, LowV , LowS), Scalar(HighS, HighH, HighV),MojeRange);
 
        
         // wys wart
-        putText(pokazaniehsv, to_string(uRangeOne), { 10,30 }, FONT_HERSHEY_PLAIN, 1.0, { 255,4,4,4 });
-        putText(pokazaniehsv, to_string(uRangeTwo), { 10,50 }, FONT_HERSHEY_PLAIN, 1.0, { 255,4,4,4 });
-        putText(pokazaniehsv, to_string(uRangeThree), { 10,70 }, FONT_HERSHEY_PLAIN, 1.0, { 255,4,4,4 });
-        putText(pokazaniehsv, to_string(lRangeOne), { 10,90 }, FONT_HERSHEY_PLAIN, 1.0, { 255,4,4,4 });
-        putText(pokazaniehsv, to_string(lRangeTwo), { 10,110 }, FONT_HERSHEY_PLAIN, 1.0, { 255,4,4,4 });
-        putText(pokazaniehsv, to_string(lRangeThree), { 10,130 }, FONT_HERSHEY_PLAIN, 1.0, { 255,4,4,4 });
+        putText(pokazaniehsv, to_string(LowH), { 10,30 }, FONT_HERSHEY_PLAIN, 1.0, { 255,255,255,8 });
+        putText(pokazaniehsv, to_string(HighH), { 10,50 }, FONT_HERSHEY_PLAIN, 1.0, { 255,255,255,8 });
+        putText(pokazaniehsv, to_string(LowS), { 10,70 }, FONT_HERSHEY_PLAIN, 1.0, { 255,255,255,8 });
+        putText(pokazaniehsv, to_string(HighS), { 10,90 }, FONT_HERSHEY_PLAIN, 1.0, { 255,255,255,8 });
+        putText(pokazaniehsv, to_string(LowV), { 10,110 }, FONT_HERSHEY_PLAIN, 1.0, { 255,255,255,8 });
+        putText(pokazaniehsv, to_string(HighV), { 10,130 }, FONT_HERSHEY_PLAIN, 1.0, { 255,255,255,8 });
        
         
 
